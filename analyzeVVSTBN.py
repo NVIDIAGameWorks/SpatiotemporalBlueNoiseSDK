@@ -15,6 +15,7 @@ import os
 import os.path
 import pandas as pd
 import matplotlib.pyplot as plt
+from skimage import exposure
 
 if len(sys.argv) != 3:
     print('Usage: python analyze.py baseFileName count')
@@ -104,6 +105,14 @@ for index in range(fileCount):
         singleDFTB = im
     else:
         avgDFTB = avgDFTB + im / float(fileCount)
+
+# combine vector per axis DFTs into a single DFT
+combinedDFT3 = np.sqrt(avgDFTR*avgDFTR + avgDFTG*avgDFTG + avgDFTB*avgDFTB)
+combinedDFT2 = np.clip(exposure.equalize_hist(combinedDFT3, 256) * 256, 0, 255) # <- does a histogram equalization on the DFT to better visualize differences
+combinedDFT = np.array(np.round(combinedDFT2),dtype=np.uint8)
+Image.fromarray(combinedDFT,mode="L").save(baseFileName + ".combinedmag.equalized.xy.png")
+combinedDFT4 = np.array(np.round(combinedDFT3),dtype=np.uint8)
+Image.fromarray(combinedDFT4,mode="L").save(baseFileName + ".combinedmag.xy.png")
         
 avgDFTR=np.array(np.round(avgDFTR),dtype=np.uint8)
 avgDFTG=np.array(np.round(avgDFTG),dtype=np.uint8)
@@ -118,6 +127,12 @@ avgDFT[:,:,0] = avgDFTR
 avgDFT[:,:,1] = avgDFTG
 avgDFT[:,:,2] = avgDFTB
 Image.fromarray(avgDFT,mode="RGB").save(baseFileName + ".mag.xy.png")
+
+avgDFT = np.empty([avgDFTR.shape[0], avgDFTR.shape[1], 3], dtype=np.uint8)
+avgDFT[:,:,0] = np.clip(exposure.equalize_hist(avgDFTR, 256) * 256, 0, 255)
+avgDFT[:,:,1] = np.clip(exposure.equalize_hist(avgDFTG, 256) * 256, 0, 255)
+avgDFT[:,:,2] = np.clip(exposure.equalize_hist(avgDFTB, 256) * 256, 0, 255)
+Image.fromarray(avgDFT,mode="RGB").save(baseFileName + ".mag.equalized.xy.png")
 
 singleDFTR=np.array(np.round(singleDFTR),dtype=np.uint8)
 singleDFTG=np.array(np.round(singleDFTG),dtype=np.uint8)
@@ -188,7 +203,16 @@ for index in range(imagesR.shape[2]):
         singleDFTB = im
     else:
         avgDFTB = avgDFTB + im / float(imagesR.shape[2])
-        
+
+# combine vector per axis DFTs into a single DFT
+combinedDFT3 = np.sqrt(avgDFTR*avgDFTR + avgDFTG*avgDFTG + avgDFTB*avgDFTB)
+combinedDFT2 = np.clip(exposure.equalize_hist(combinedDFT3, 256) * 256, 0, 255) # <- does a histogram equalization on the DFT to better visualize differences
+combinedDFT = np.array(np.round(combinedDFT2),dtype=np.uint8)
+Image.fromarray(combinedDFT,mode="L").save(baseFileName + ".combinedmag.equalized.xz.png")
+combinedDFT4 = np.array(np.round(combinedDFT3),dtype=np.uint8)
+Image.fromarray(combinedDFT4,mode="L").save(baseFileName + ".combinedmag.xz.png")
+
+
 avgDFTR=np.array(np.round(avgDFTR),dtype=np.uint8)
 avgDFTG=np.array(np.round(avgDFTG),dtype=np.uint8)
 avgDFTB=np.array(np.round(avgDFTB),dtype=np.uint8)
@@ -198,6 +222,12 @@ avgDFT[:,:,0] = avgDFTR
 avgDFT[:,:,1] = avgDFTG
 avgDFT[:,:,2] = avgDFTB
 Image.fromarray(avgDFT,mode="RGB").save(baseFileName + ".mag.xz.png")
+
+avgDFT = np.empty([avgDFTR.shape[0], avgDFTR.shape[1], 3], dtype=np.uint8)
+avgDFT[:,:,0] = np.clip(exposure.equalize_hist(avgDFTR, 256) * 256, 0, 255)
+avgDFT[:,:,1] = np.clip(exposure.equalize_hist(avgDFTG, 256) * 256, 0, 255)
+avgDFT[:,:,2] = np.clip(exposure.equalize_hist(avgDFTB, 256) * 256, 0, 255)
+Image.fromarray(avgDFT,mode="RGB").save(baseFileName + ".mag.equalized.xz.png")
 
 singleDFTR=np.array(np.round(singleDFTR),dtype=np.uint8)
 singleDFTG=np.array(np.round(singleDFTG),dtype=np.uint8)

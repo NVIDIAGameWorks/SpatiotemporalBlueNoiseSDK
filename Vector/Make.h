@@ -49,7 +49,7 @@ template <typename T, size_t N>
 std::array<T, N>& operator /=(std::array<T, N>& A, const std::array<T, N>& B)
 {
     for (size_t i = 0; i < N; ++i)
-        A[i] *= B[i];
+        A[i] /= B[i];
     return A;
 }
 
@@ -677,7 +677,7 @@ struct Make_UnitFloat3 : public MakeBase<3, dimsX, dimsY, dimsZ, sigmaX, sigmaY,
                     }
 
                     char fileName[1024];
-                    sprintf_s(fileName, "%s_debughist2d_%ix%ix%i.png", baseFileName, TSuper::c_width, TSuper::c_height, TSuper::c_depth);
+                    sprintf_s(fileName, "%s_debughist2d_%ix%ix%i.png", baseFileName, Make_UnitFloat3::c_width, Make_UnitFloat3::c_height, Make_UnitFloat3::c_depth);
                     stbi_write_png(fileName, isw, ish, 1, Histogram2D.data(), 0);
                 }
             #endif

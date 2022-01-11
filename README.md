@@ -2,7 +2,7 @@
 
 STBN.zip contains pregenerated spatiotemporal blue noise textures of various types.
 
-This repo goes along with these blog posts:
+This repo also contains the sample code to generate spatiotemporal blue noise textures of various types and goes along with these blog posts:
 
 https://developer.nvidia.com/blog/rendering-in-real-time-with-spatiotemporal-blue-noise-textures-part-1/
 

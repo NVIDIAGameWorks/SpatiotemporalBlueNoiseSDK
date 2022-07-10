@@ -8,6 +8,10 @@ https://developer.nvidia.com/blog/rendering-in-real-time-with-spatiotemporal-blu
 
 https://developer.nvidia.com/blog/rendering-in-real-time-with-spatiotemporal-blue-noise-textures-part-2/
 
-As well as this arxiv paper:
+As well as this EGSR 2022 paper:
+
+https://diglib.eg.org/handle/10.2312/sr20221161
+
+And this arxiv paper:
 
 https://arxiv.org/abs/2112.09629

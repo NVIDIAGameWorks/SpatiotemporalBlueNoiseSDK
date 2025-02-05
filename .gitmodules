@@ -1,0 +1,12 @@
+[submodule "thirdparty/cxxopts"]
+	path = External/cxxopts
+	url = https://github.com/jarro2783/cxxopts.git
+[submodule "thirdparty/gtest"]
+	path = External/gtest
+	url = https://github.com/google/googletest.git
+[submodule "thirdparty/pcg-c-basic"]
+	path = External/pcg-c-basic
+	url = https://github.com/imneme/pcg-c-basic.git
+[submodule "thirdparty/stb"]
+	path = External/stb
+	url = https://github.com/nothings/stb.git
